@@ -23,8 +23,6 @@ uint16_t volt_bat = 0;
 uint16_t volt_fence_plus = 0;
 uint16_t volt_fence_minus = 0;
 
-uint32_t upctr = 0;
-
 // ----------------------------------------------------------------------------------------------
 
 ISR(TIMER2_OVF_vect) {
@@ -124,35 +122,7 @@ void rn2483_init() {
 	}
 	#endif
 	
-	rn2483_tx("mac get upctr\r\n");
-	rn2483_rx();
-	sscanf(buffer_rn, "%lu", &upctr);
-	
-	#ifdef DEBUG
-	sprintf(buffer_dbg, "RN2483 upcrt: %lu\r\n", upctr);
-	debug(buffer_dbg);
-	#endif	
-	
-	if (upctr % SAVE_INTERVAL == 0) {
-		upctr += SAVE_INTERVAL;
-		
-		sprintf(buffer_rn, "mac set upctr %lu\r\n", upctr);
-		rn2483_tx(buffer_rn);
-		rn2483_rx();
-		if (strcmp(buffer_rn, "ok\r\n") != 0) {
-			rn2483_init_error();
-			return;
-		}
-				
-		rn2483_tx("mac save\r\n");
-		rn2483_rx();
-		if (strcmp(buffer_rn, "ok\r\n") != 0) {
-			rn2483_tx_error();
-			return;
-		}
-	}
-	
-	rn2483_tx("mac join abp\r\n");
+	rn2483_tx("mac join otaa\r\n");
 	rn2483_rx();
 	if (strcmp(buffer_rn, "ok\r\n") != 0) {
 		rn2483_tx_error();
@@ -457,11 +427,6 @@ int main(void) {
 	LED_TX_set_level(false);
 	
 	while (1) {
-		
-		#ifdef DEBUG
-		sprintf(buffer_dbg, "Round: %lu\r\n", upctr);
-		debug(buffer_dbg);
-		#endif
 		
 		measure();
 		
