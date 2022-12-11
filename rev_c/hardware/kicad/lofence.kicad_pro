@@ -369,8 +369,7 @@
           "ADC_POWER",
           "BAT_VCC",
           "GND",
-          "Net-(BT1-Pad1)",
-          "VCC_BBC"
+          "Net-(BT1-Pad1)"
         ],
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgba(0, 0, 0, 0.000)",
