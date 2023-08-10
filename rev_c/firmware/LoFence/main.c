@@ -406,17 +406,6 @@ void transmit() {
 		return;
 	}
 	
-	upctr++;
-	
-	if (upctr % SAVE_INTERVAL == 0) {
-		rn2483_tx("mac save\r\n");
-		rn2483_rx();
-		if (strcmp(buffer_rn, "ok\r\n") != 0) {
-			rn2483_tx_error();
-			return;
-		}	
-	}
-	
 	rn2483_tx("sys sleep 86400000\r\n");
 	
 	LED_TX_set_level(false);
