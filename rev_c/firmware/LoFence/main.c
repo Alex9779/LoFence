@@ -18,7 +18,7 @@ uint8_t adc_val = 0;
 
 char buffer_dbg[256];
 char buffer_rn[256];
-	
+
 uint16_t volt_bat = 0;
 uint16_t volt_fence_plus = 0;
 uint16_t volt_fence_minus = 0;
@@ -30,7 +30,7 @@ uint32_t upctr = 0;
 ISR(TIMER2_OVF_vect) {
 	// see https://www.mikrocontroller.net/articles/AVR-GCC-Tutorial/Die_Timer_und_Z%C3%A4hler_des_AVR#Timer2_im_Asynchron_Mode
 	TCCR2B = TCCR2B;
-	seconds++;	
+	seconds++;
 	LED_CLK_toggle_level();
 	while(ASSR & ((1<<TCN2UB) | (1<<OCR2AUB) | (1<<OCR2BUB) | (1<<TCR2AUB) | (1<<TCR2BUB)));
 }
@@ -91,7 +91,7 @@ void rn2483_init() {
 	_delay_ms(1000);
 
 	rn2483_break_and_baud();
-			
+	
 	rn2483_tx("sys get ver\r\n");
 	rn2483_rx();
 
@@ -163,7 +163,7 @@ void rn2483_init() {
 		rn2483_tx_error();
 		return;
 	}
-		
+	
 	rn2483_tx("sys sleep 86400000\r\n");
 
 	#ifdef DEBUG
@@ -254,7 +254,7 @@ void debug(char buf[]) {
 	for (uint8_t i = 0; i < strlen(buf); i++) {
 		while (!USART_1_is_tx_ready()) {}
 		USART_1_write(buf[i]);
-	}	
+	}
 	while (USART_1_is_tx_busy()) {}
 	#endif
 }
@@ -303,15 +303,15 @@ void measure() {
 	#ifdef DEBUG
 	debug("Measuring\r\n");
 	#endif
-		
+	
 	// ----------------------------------------------------------------------------------------------
 
 	PRR0 &= ~(1 << PRADC); // Enable ADC
 	ADC_POWER_set_level(true);
 	_delay_ms(1000);
-		
+	
 	// ----------------------------------------------------------------------------------------------
-		
+	
 	#ifdef DEBUG
 	debug("Measuring battery: ");
 	#endif
@@ -339,7 +339,7 @@ void measure() {
 	#ifdef DEBUG
 	debug("Measuring fence positive: ");
 	#endif
-				
+	
 	ADMUX = (ADMUX & 0xE0); // Pin 0
 	ADCSRA |= (1 << ADEN);
 	ADCSRA |= (1 << ADSC);
@@ -398,7 +398,7 @@ void transmit() {
 	rn2483_rx();
 	if (strcmp(buffer_rn, "ok\r\n") != 0) {
 		rn2483_tx_error();
-		return;	
+		return;
 	}
 	rn2483_rx();
 	if (strcmp(buffer_rn, "mac_tx_ok\r\n") != 0) {
@@ -464,9 +464,9 @@ int main(void) {
 	adc_init();
 	LED_MSR_set_level(false);
 
-	rn2483_init();			
+	rn2483_init();
 	LED_TX_set_level(false);
-		
+	
 	while (1) {
 		
 		#ifdef DEBUG
@@ -476,7 +476,7 @@ int main(void) {
 		
 		measure();
 		
-		transmit();		
+		transmit();
 		
 		pause();
 	}
