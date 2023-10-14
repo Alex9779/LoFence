@@ -1,0 +1,6 @@
+[submodule "hardware"]
+	path = hardware
+	url = https://github.com/Alex9779/LoFence_Hardware.git
+[submodule "firmware"]
+	path = firmware
+	url = https://github.com/Alex9779/LoFence_Firmware.git
