@@ -22,3 +22,31 @@ Other things changed are:
   - Changed various components to SMD variants.
   - Switch to buck-boost converter for power supply.
   - Use clamps for holding batteries instead of full holder.
+
+For information how to build a LoFence V2 device see the [hardware repository](https://github.com/Alex9779/LoFence_Hardware).
+
+For information how to build, upload or configure the firmware see the [firmware repository](https://github.com/Alex9779/LoFence_Firmware).
+
+## WARNING
+
+Do not let the debug LEDs activated during normal operation!
+
+They need a lot of current compared to the overall device's current usage. So if activated they drastically reduce the battery runtime to just some weeks or even days.
+
+## Device activation
+
+The LoFence V2 is equipped with an activation circuit allowing the device to deactivate itself if the battery voltage goes under a configured level (3400mV by default for 5 cycles or 3100mV as an absolute minumum) to prevent the battery from deep discharge.
+
+Therefore the device does not automatically activate if a battery is put in but you have to push and hold the *ACTIVATE* button for at least 1 second.
+
+If the debug LEDs are activated the *IDLE* LED indicates that the activation process has been completed when it goes out.
+
+After activation the device tries to join (re-join) the network, LoRaWAN counters are reset.
+
+If joining succeeds the device will immediately do the first measurement and after that transmits the first uplink.
+
+## Device resetting
+
+To reset the device push the *RESET* button. After a reset the device has to be activated again.
+
+A reset is just the same as removing all batteries and put them back in and activate the device.
