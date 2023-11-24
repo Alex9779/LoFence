@@ -35,7 +35,7 @@ They need a lot of current compared to the overall device's current usage. So if
 
 ## Device activation
 
-The LoFence V2 is equipped with an activation circuit allowing the device to deactivate itself if the battery voltage goes under a configured level (3400mV by default for 5 cycles or 3100mV as an absolute minumum) to prevent the battery from deep discharge.
+The LoFence V2 is equipped with an activation circuit allowing the device to deactivate itself if the battery voltage goes under a configured level (3200mV by default for 5 cycles or 3100mV as an absolute minumum) to prevent the battery from deep discharge.
 
 Therefore the device does not automatically activate if a battery is put in but you have to push and hold the *ACTIVATE* button for at least 1 second.
 
