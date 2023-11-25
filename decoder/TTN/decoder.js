@@ -15,6 +15,7 @@ function decodeUplink(input) {
         tdc: (input.bytes[1] << 12) | (input.bytes[2] << 8) | input.bytes[3],
         msr_ms: (input.bytes[4] << 8) | input.bytes[5],
         max_volt: (input.bytes[6] << 8) | input.bytes[7],
+        bat_low_min: ((input.bytes[4] << 8) | input.bytes[5]).toString() + " mV",
       },
     };
   }

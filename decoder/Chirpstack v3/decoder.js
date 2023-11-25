@@ -11,6 +11,7 @@ function Decode(fPort, bytes, variables) {
     decoded.tdc = (bytes[1] << 12) | (bytes[2] << 8) | bytes[3];
     decoded.msr_ms = (bytes[4] << 8) | bytes[5];
     decoded.max_volt = (bytes[6] << 8) | bytes[7];
+    decoded.bat_low_min = (bytes[4] << 8) | bytes[5];
   }
   else if (fPort === 3 && bytes.length === 3) {
     decoded.version = bytes[0];
