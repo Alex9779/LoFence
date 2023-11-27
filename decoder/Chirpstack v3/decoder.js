@@ -18,7 +18,7 @@ function Decode(fPort, bytes, variables) {
     decoded.bat_low_count_max = bytes[3];
     decoded.bat_low_min = (bytes[4] << 8) | bytes[5];
   }
-  else if (fPort === 254 && bytes.length === 1) {
+  else if (fPort === 223 && bytes.length === 1) {
     decoded.last_error = bytes[0];
   }
 

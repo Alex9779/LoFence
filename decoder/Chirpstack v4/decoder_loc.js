@@ -18,7 +18,7 @@ function decodeUplink(input) {
     data.bat_low_count_max = (input.bytes[3]).toString();
     data.bat_low_min = ((input.bytes[4] << 8) | input.bytes[5]).toString() + " mV";
   }
-  else if (input.fPort == 254) {
+  else if (input.fPort == 223) {
     data.last_error = (input.bytes[0]).toString();
   }
 
